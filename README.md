@@ -1,26 +1,51 @@
-# 🚀 E-Commerce Fraud & Inventory Audit Engine (Snowflake)
+# 🚀 E-Commerce Real-Time Fraud Engine & Executive Analytics Pipeline
 
-A production-grade, end-to-end data engineering pipeline built entirely in **Snowflake** to ingest semi-structured webhooks, track real-time changes using Change Data Capture (CDC), and automatically route transactions into clean operational tables and security fraud alerts.
-
----
-
-## 🏗️ Architecture & Workflow
-
-1. **Semi-Structured Ingestion:** Ingests live webhook data containing nested JSON payloads into a raw landing table utilizing Snowflake's `VARIANT` data type.
-2. **Change Data Capture (CDC):** Utilizes Snowflake `STREAM` objects to track delta changes (`INSERT` operations) efficiently without expensive full-table scans.
-3. **Staging & Conditional Routing:** Safely captures stream data into a temporary staging table to prevent offset consumption traps, routing transactions based on strict business logic:
-   * **Clean Transactions:** Threshold $\le$ $3,000.00 route to `CLEANED_TRANSACTIONS`.
-   * **Fraud Alerts:** High-value transactions (> $3,000.00) or unrecognized geolocations (`Unknown`) automatically route to `FRAUD_ALERTS` with explicit risk reasons.
-4. **Automation:** Powered by automated Snowflake `TASK` orchestration and auto-suspending virtual warehouses for cost efficiency.
+An end-to-end fraud detection and telemetry analytics solution built to simulate, process, store, and visualize high-risk e-commerce transaction events. This project demonstrates modern data stack (MDS) capabilities, leveraging Python for synthetic data generation, Snowflake for cloud data warehousing, and Power BI for executive-level business intelligence.
 
 ---
 
-## 🛠️ Tech Stack & Concepts
-* **Cloud Data Warehouse:** Snowflake (`ACCOUNTADMIN`, custom Virtual Warehouses)
-* **Data Types & Parsing:** `VARIANT`, dot-notation, and explicit type casting (`::FLOAT`, `::INT`, `::STRING`)
-* **CDC & Orchestration:** Streams (`METADATA$ACTION`), Temporary Staging patterns, and scheduled Tasks
+## 🛠️ Tech Stack & Architecture
+
+* **Data Generation & Orchestration:** Python (Pandas, NumPy, Faker), Google Colab
+* **Cloud Data Warehouse:** Snowflake (`PORTFOLIO_DB`)
+* **Data Visualization & BI:** Power BI Desktop (`Fraud_Telemetry_Executive_Dashboard.pbix`)
+* **Version Control:** Git & GitHub
 
 ---
 
-## 📂 Repository Structure
-* `ecommerce_fraud_audit_engine.sql` — Complete end-to-end SQL script containing database setup, stream configuration, routing logic, and test cases.
+## 📊 Key Features & Components
+
+1. **Synthetic Telemetry Simulation:** Generates realistic e-commerce event streams including transaction amounts, device categories, timestamps, user IDs, and geographic locations.
+2. **Cloud Data Warehouse (`Snowflake`):** Tables structured and queried efficiently for rapid aggregation and analytics retrieval.
+3. **Interactive Power BI Executive Dashboard:**
+   * **Executive KPI Cards:** Real-time tracking of **Total Event Volume (500)** and **Average Risk Score (0.51)**.
+   * **Trend Line Chart:** Time-series analysis tracking transaction volume spikes and patterns across temporal intervals.
+   * **Geographic Bar Chart:** Regional event distribution mapping out global hubs (Rome, New Delhi, Milan, Turin, Hyderabad).
+   * **Device Donut Chart:** Categorical split analyzing user device types (Desktop, Mobile, Tablet).
+   * **Dynamic Date Slicer:** Interactive timeline filtering enabling stakeholders to slice data by custom date ranges.
+
+---
+
+## 🖥️ Dashboard Preview & Demo
+
+### **Executive Overview**
+![Fraud Engine Dashboard Overview](ecommerce-fraud-analytics-executive-view.png)
+
+### **Interactive Cross-Filtering & Slicers**
+![Fraud Engine Interactive Demo](ecommerce-fraud-engine-interactive.gif)
+
+---
+
+## 📈 Impact & Resume Highlights
+
+* Engineered a robust end-to-end analytics workflow from raw data simulation to production-grade visualization, reducing manual reporting bottlenecks.
+* Leveraged advanced Snowflake SQL and Power BI modeling to deliver sub-second query performance and executive-level risk visibility.
+* Established a scalable reporting framework capable of tracking operational throughput, geographic distribution, and device-level vulnerability metrics.
+
+---
+
+## 🚀 Getting Started
+
+1. **Clone the Repository:**
+   ```bash
+   git clone [https://github.com/your-username/ecommerce-fraud-engine.git](https://github.com/your-username/ecommerce-fraud-engine.git)
